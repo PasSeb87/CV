@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasquale Sebastianelli | CV</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23f1f5f9'/%3E%3Ctext x='50%25' y='55%25' font-family='Lexend, Arial, sans-serif' font-weight='700' font-size='32' text-anchor='middle' fill='%231a436d'%3EPS%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a436d;
+            --accent: #3b82f6;
+            --bg-body: #f1f5f9;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --sidebar-width: 380px;
+            --deloitte-green: #86bc25;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lexend', sans-serif; background-color: var(--bg-body); color: var(--text-main); display: flex; min-height: 100vh; }
+
+        .lang-switcher { position: fixed; top: 20px; right: 20px; display: flex; gap: 8px; z-index: 1000; }
+        .lang-btn { 
+            background: white; border: 1px solid #cbd5e1; color: var(--primary); 
+            padding: 8px 16px; border-radius: 8px; cursor: pointer; 
+            font-size: 0.8rem; font-weight: 700; transition: 0.3s;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        .lang-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        
+        [data-lang] { display: none !important; }
+        [data-lang].active-lang { display: block !important; }
+        span[data-lang].active-lang { display: inline-block !important; }
+
+        aside {
+            width: var(--sidebar-width); background: var(--primary); color: white;
+            padding: 3rem 2rem; position: fixed; height: 100vh;
+            display: flex; flex-direction: column; overflow-y: auto;
+        }
+
+        .profile-img { width: 110px; height: 110px; border-radius: 50%; background: #94a3b8; margin: 0 auto 1.5rem; border: 3px solid white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 2rem; }
+        h1 { font-size: 1.3rem; text-align: center; margin-bottom: 0.35rem; letter-spacing: -0.5px; }
+        .role { font-size: 0.7rem; color: #93c5fd; text-transform: uppercase; text-align: center; margin-bottom: 0.6rem; letter-spacing: 1px; opacity: 0.9; }
+        .intro-text { font-size: 0.9rem; color: rgba(255,255,255,0.95); text-align: center; line-height: 1.4; margin-top: 0.25rem; }
+
+        .aside-section { margin-top: 2.5rem; }
+        .aside-section h4 { font-size: 0.65rem; text-transform: uppercase; color: #93c5fd; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; letter-spacing: 1.5px; }
+        .info-item { font-size: 0.8rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px; }
+    
+        .lang-native { font-weight: 600; }
+        .lang-skill { display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.95); margin-bottom: 0.4rem; justify-content: space-between; }
+        .skill-label { font-size: 0.82rem; color: rgba(255,255,255,0.95); }
+        .dots { display:flex; gap:6px; }
+        .dot { width:9px; height:9px; border-radius:50%; background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.12); display:inline-block; }
+        .dot.filled { background: var(--accent); border-color: rgba(0,0,0,0.08); box-shadow: 0 1px 0 rgba(0,0,0,0.06) inset; }
+    
+        .dot:focus-visible { outline: 2px solid rgba(59,130,246,0.25); outline-offset: 2px; }
+
+        .lang-block { margin-bottom: 1.5rem; }
+        .lang-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; display: block; }
+        .lang-subtitle { font-size: 0.75rem; color: #93c5fd; margin-bottom: 0.8rem; display: block; }
+        
+        .skill-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem; padding-left: 10px; }
+        .skill-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; }
+        .dots { display: flex; gap: 4px; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.1); }
+        .dot.fill { background: var(--accent); border-color: var(--accent); }
+
+        main { margin-left: var(--sidebar-width); padding: 4rem; flex: 1; max-width: 1000px; }
+        h2 { font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--primary); display: flex; align-items: center; }
+        h2::after { content: ""; height: 1px; background: var(--primary); flex: 1; margin-left: 1.5rem; opacity: 0.15; }
+        
+        .section-note { font-size: 0.8rem; font-style: italic; color: var(--text-muted); margin-bottom: 2rem; display: block; }
+
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e2e8f0; }
+        .timeline-item { position: relative; margin-bottom: 2.5rem; }
+        .timeline-marker { position: absolute; left: -2rem; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: white; border: 3px solid var(--accent); z-index: 2; }
+        .timeline-date { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.6rem; display: block; }
+
+        .card { 
+            background: white; border: 1px solid #e2e8f0; border-radius: 0.8rem; padding: 1.5rem; 
+            cursor: pointer; transition: 0.2s ease-out; overflow: hidden; position: relative;
+        }
+        .card:hover { border-color: var(--accent); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05); }
+        
+        .card-header-deloitte { display: flex; align-items: flex-end; gap: 12px; flex-wrap: nowrap; }
+        .card-titles-deloitte { flex: 1; min-width: 0; }
+        .logo-container-deloitte { width: 90px; height: 36px; position: absolute; right: 1.5rem; top: 0.6rem; display: flex; align-items: center; justify-content: center; }
+        .logo-deloitte { width: auto; height: 100%; max-width: 100%; display: block; object-fit: contain; }
+
+        .card-header-ca { display: flex; align-items: flex-end; gap: 12px; flex-wrap: nowrap; }
+        .card-titles-ca { flex: 1; min-width: 0; }
+        .logo-container-ca { width: 90px; height: 36px; position: absolute; right: 0.2rem; top: 0.8rem; display: flex; align-items: center; justify-content: center; }
+        .logo-ca { width: auto; height: 100%; max-width: 100%; display: block; object-fit: contain; }
+
+        .card-header-poste { display: flex; align-items: flex-end; gap: 12px; flex-wrap: nowrap; }
+        .card-titles-poste { flex: 1; min-width: 0; }
+        .logo-container-poste { width: 110px; height: 44px; position: absolute; right: 1.5rem; top: 0.5rem; display: flex; align-items: center; justify-content: center; }
+        .logo-poste { width: auto; height: 100%; max-width: 100%; display: block; object-fit: contain; }
+
+        .card-header-unipol { display: flex; align-items: flex-end; gap: 12px; flex-wrap: nowrap; }
+        .card-titles-unipol { flex: 1; min-width: 0; }
+        .logo-container-unipol { width: 110px; height: 44px; position: absolute; right: 0.8rem; top: 0.5rem; display: flex; align-items: center; justify-content: center; }
+        .logo-unipol { width: auto; height: 70%; max-width: 100%; display: block; object-fit: contain; }
+
+        .card-header-allianz { display: flex; align-items: flex-end; gap: 12px; flex-wrap: nowrap; }
+        .card-titles-allianz { flex: 1; min-width: 0; }
+        .logo-container-allianz { width: 110px; height: 44px; position: absolute; right: 1.5rem; top: 0.5rem; display: flex; align-items: center; justify-content: center; }
+        .logo-allianz { width: auto; height: 60%; max-width: 100%; display: block; object-fit: contain; }
+
+        .card h3 { font-size: 1.05rem; color: var(--primary); margin-bottom: 0.2rem; line-height: 1.3; }
+        .card .company { font-weight: 500; font-size: 0.85rem; color: var(--text-main); }
+        
+        .card-content { max-height: 0; overflow: hidden; opacity: 0; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card.active .card-content { max-height: 600px; opacity: 1; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #e2e8f0; }
+        .card ul { padding-left: 1.2rem; font-size: 0.85rem; color: #475569; line-height: 1.6; }
+
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .box-item { background: white; padding: 1rem; border-radius: 0.7rem; text-align: center; font-size: 0.8rem; font-weight: 600; border: 1px solid #e2e8f0; }
+
+        @media (max-width: 1100px) { body { flex-direction: column; } aside { width: 100%; height: auto; position: relative; } main { margin-left: 0; padding: 2rem; } }
+        @media (max-width: 600px) { 
+            .card-header { flex-direction: column-reverse; gap: 10px; } 
+            .logo-container { width: 70px; }
+            .logo-container-deloitte, .logo-container-ca, .logo-container-poste, .logo-container-unipol, .logo-container-allianz { position: static; right: auto; bottom: auto; margin-left: 0; height: 30px; }
+                .intro-text { text-align: left; }
+        }
+    
+        .gauges { gap: 1rem; }
+        .gauge-svg { background: white; border: 1px solid #e2e8f0; border-radius: 0.8rem; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: center; position: relative; height: 140px; flex-direction: column; }
+        .gauge-svg svg { width: 120px; height: 70px; overflow: visible; display: block; }
+        .gauge-svg .gauge-track { fill: none; stroke: #e2e8f0; stroke-width: 8; stroke-linecap: round; }
+        .gauge-svg .gauge-arc { fill: none; stroke: var(--accent); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 0; stroke-dashoffset: 0; transition: stroke-dashoffset 700ms cubic-bezier(0.22, 1, 0.36, 1); }
+        .gauge-center { position: relative; z-index: 2; text-align: center; margin-top: 8px; }
+        .gauge-value { font-weight: 700; color: var(--primary); font-size: 1rem; }
+        .gauge-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+    
+        .gauge-info { position: absolute; bottom: -8px; left: 50%; transform: translate(-50%, 100%); background: white; border: 1px solid #e2e8f0; padding: 0.6rem 0.8rem; border-radius: 0.6rem; box-shadow: 0 8px 20px rgba(0,0,0,0.06); width: 220px; font-size: 0.8rem; color: var(--text-main); display: none; z-index: 30; text-align: left; }
+        .gauge-svg:hover .gauge-info, .gauge-svg:focus-within .gauge-info { display: block; }
+        .gauge-svg.open .gauge-info { display: block; }
+        .gauge-info ul { padding-left: 1rem; margin: 0; }
+        .gauge-info li { margin-bottom: 0.25rem; }
+    
+        .passions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .passion { background: white; border: 1px solid #e2e8f0; border-radius: 0.8rem; padding: 1rem; display:flex; flex-direction:column; align-items:center; gap:0.4rem; color: var(--primary); transition: transform 180ms ease, box-shadow 180ms ease; text-align: center; }
+        .passion:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.06); }
+        .passion svg { width: 44px; height: 44px; display:block; }
+        .passion svg path, .passion svg circle, .passion svg rect { stroke: var(--accent); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    
+        .passion-label { font-size: 0.8rem; color: var(--text-main); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    
+        .license-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 0.75rem; align-items: center; justify-items: start; max-width: 360px; }
+        .license-item { padding: 0.2rem 0.2rem; border-radius: 0.4rem; text-align: left; display:flex; gap:0.75rem; align-items:center; justify-content:flex-start; font-weight:700; font-size:0.95rem; background: transparent; border: none; }
+        .license-badge { width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; background: white; color:var(--primary); border:1px solid #e2e8f0; font-weight:800; font-size:1.05rem; }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switcher">
+        <button id="btn-it" class="lang-btn active" onclick="setLang('it')">IT</button>
+        <button id="btn-en" class="lang-btn" onclick="setLang('en')">EN</button>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <button id="btn-cv" class="lang-btn" onclick="downloadCV()">
+            <i class="fas fa-download"></i> CV
+        </button>
+    </div>
+
+    <aside>
+        <h1>PASQUALE SEBASTIANELLI</h1>
+        <div class="role">Non-Life Actuary & Data Scientist</div>
+        
+        <div class="aside-section">
+            <p class="intro-text"><span class="active-lang" data-lang="it">Dai modelli attuariali per grandi gruppi alla guida del Modelling Centre, il mio percorso è segnato da un’evoluzione tecnica costante. Come tech-curious, cerco costantemente di superare gli standard di settore integrando Machine Learning e Generative AI con uno spirito innovativo. Ricerco sfide in contesti dinamici e non limitanti, dove la complessità del dato permette di progettare soluzioni d’avanguardia e scalabili.</span><span data-lang="en">From core actuarial modeling for major insurance groups to leading Modelling Centre, my career has been defined by continuous technical evolution. As a tech-curious professional, I am constantly pushing industry boundaries by integrating Machine Learning and Generative AI with an innovative mindset. I thrive in dynamic, forward-thinking environments that defy conventional limits, where data complexity offers the opportunity to design solutions.</span></div>
+        </div>
+        <div class="aside-section">
+            <h4 data-lang="it" class="active-lang">Contatti</h4>
+            <h4 data-lang="en">Contacts</h4>
+            <div class="info-item">📅 13-01-1987</div>
+            <div class="info-item">📍 Telese Terme (BN), IT</div>
+            <div class="info-item">📧 pasquale.sebastianelli1987@gmail.com</div>
+            <div class="info-item">📞 +39 339 4653121</div>
+        </div>
+
+        <div class="aside-section">
+            <h4>Lingue</h4>
+            
+            <div class="lang-block">
+                <div class="lang-subtitle"><span class="active-lang" data-lang="it">🇮🇹 Italiano</span><span data-lang="en">🇮🇹 Italian</span></div>
+                <div class="lang-subtitle"><span class="active-lang" data-lang="it">Madrelingua</span><span data-lang="en">Native</span></div>
+            </div>
+
+            <div class="lang-block">
+                <div class="lang-subtitle"><span class="active-lang" data-lang="it">🇬🇧 Inglese</span><span data-lang="en">🇬🇧 English</span></div>
+                <div class="lang-subtitle"><span class="active-lang" data-lang="it">Professionale</span><span data-lang="en">Professional</span></div>
+                
+                <div class="skill-row">
+                    <span class="skill-label">Reading</span>
+                    <div class="dots">
+                        <div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-label">Writing</span>
+                    <div class="dots">
+                        <div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-label">Listening</span>
+                    <div class="dots">
+                        <div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div><div class="dot"></div>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-label">Speaking</span>
+                    <div class="dots">
+                        <div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div><div class="dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </aside>
+
+    <main>
+        <section style="margin-top: 2rem;">
+            <h2 data-lang="it" class="active-lang">Esperienza Professionale</h2>
+            <h2 data-lang="en">Professional Experience</h2>
+            <span class="section-note">
+                <span data-lang="it" class="active-lang">* Clicca sulle sezioni per espandere i dettagli</span>
+                <span data-lang="en">* Click on sections to expand details</span>
+            </span>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="timeline-date"><span data-lang="it" class="active-lang">Gennaio 2019 — Oggi</span><span data-lang="en">January 2019 — Present</span></span>
+                    <div class="card" onclick="this.classList.toggle('active')">
+                        <div class="card-header-deloitte">
+                            <div class="card-titles-deloitte">
+                                <h3 data-lang="it" class="active-lang">Attuario Non-Life & Data Scientist - Senior Manager</h3>
+                                <h3 data-lang="en">Non-Life Actuarial & Data Scientist - Senior Manager</h3>
+                                <div class="company"><span data-lang="it" class="active-lang">Deloitte Advisory - Napoli, IT</span><span data-lang="en">Deloitte Advisory - Naples, IT</span></div>
+                            </div>
+                            <div class="logo-container-deloitte">
+                                <img class="logo-deloitte" src="deloitte_logo.svg" alt="Deloitte" />
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <ul data-lang="it" class="active-lang">
+                                <li><b>Strategic Growth & Business Development.</b> Supporto alla definizione del piano di crescita della business line e coordinamento strategico ed operativo del portafoglio clienti.</li>
+                                <li><b>Leadership del Modelling Centre.</b> Responsabile del centro di eccellenza specializzato nello sviluppo di modelli di stima avanzati per i mercati Assicurativo Non-Life e Corporate.</li>
+                                <li><b>Innovazione & Advanced Analytics.</b> Lead di progetti pionieristici basati su Machine Learning per la riservazione tecnica, il pricing dinamico e l'analisi della Customer Retention (Churn Rate).</li>
+                                <li><b>Generative AI.</b> Ricerca e sviluppo di applicazioni basate su GenAI applicate ai processi assicurativi e alla gestione dei rischi.</li>
+                                <li><b>Rischi Catastrofali & ESG.</b> Valutazione e modellizzazione di rischi specifici, complessi e catastrofali per il calcolo dei fabbisogni di capitale.</li>
+                                <li><b>People & Stakeholder Management.</b> Coordinamento di team multidisciplinari e gestione delle relazioni ad alto livello con stakeholder interni ed esterni (Top Management e C-Level).</li>
+                            </ul>
+                            <ul data-lang="en">
+                                <li><b>Strategic Growth & Business Development.</b> Driving the business line’s expansion strategy and managing strategic/operational client relationships.</li>
+                                <li><b>Modelling Centre Leadership.</b> Head of the specialized hub dedicated to developing advanced estimation models for Non-Life Insurance and Corporate sectors.</li>
+                                <li><b>Innovation & Advanced Analytics.</b> Led cutting-edge Machine Learning projects for technical reserving, predictive pricing, and customer churn analysis.</li>
+                                <li><b>Generative AI.</b> Championing the development of GenAI-based applications to streamline insurance processes and risk assessment.</li>
+                                <li><b>Catastrophic Risk Assessment & ESG.</b> Specialized in modeling specific and catastrophic risks to support capital requirement evaluations.</li>
+                                <li><b>People & Stakeholder Management.</b> Supervising cross-functional teams and managing high-stakes interactions with internal and external C-level stakeholders.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="timeline-date"><span data-lang="it" class="active-lang">Febbraio 2018 — Dicembre 2018</span><span data-lang="en">February 2018 — December 2018</span></span>
+                    <div class="card" onclick="this.classList.toggle('active')">
+                        <div class="card-header-ca">
+                            <div class="card-titles-ca">
+                                <h3 data-lang="it" class="active-lang">Responsabile Tariffe Non-Life e Riassicurazione</h3>
+                                <h3 data-lang="en">Head of Non-Life Pricing and Reinsurance</h3>
+                                <div class="company"><span data-lang="it" class="active-lang">Credit Agricole Assicurazioni - Milano, IT</span><span data-lang="en">Credit Agricole Assicurazioni - Milan, IT</span></div>
+                            </div>
+                            <div class="logo-container-ca">
+                                <img class="logo-ca" src="ca_logo.svg" alt="Credit Agricole" />
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <ul data-lang="it" class="active-lang">
+                                <li><b>Strategia & Business Planning.</b> Definizione del piano prodotti e della pianificazione aziendale, allineando gli obiettivi di raccolta premi alla redditività tecnica della compagnia.</li>
+                                <li><b>Pricing & Machine Learning.</b> Revisione dei modelli di pricing tramite SAS, R e Python. Sviluppo di prodotti parametrici innovativi per il settore agricolo basati su algoritmi di Machine Learning.</li>
+                                <li><b>Business Intelligence & Monitoraggio.</b> Progettazione di dashboard direzionali in PowerBI e Qlik per il monitoraggio in tempo reale dell'andamento tecnico e della performance di portafoglio.</li>
+                                <li><b>Risk Mitigation & Riassicurazione.</b> Definizione e attuazione della strategia di mitigazione del rischio tramite la negoziazione e gestione di trattati di riassicurazione ottimizzati.</li>
+                                <li><b>Leadership & Stakeholder Management.</b> Gestione dell'intero team d'ufficio e coordinamento delle progettualità con il Top Management, fornitori esterni e stakeholder chiave.</li>
+                                <li><b>Data Governance.</b> Supervisione dei flussi di portafoglio e implementazione di rigorosi processi di Data Quality per garantire l'affidabilità delle basi dati tecniche.</li>
+                            </ul>
+                            <ul data-lang="en">
+                                <li><b>Strategy & Business Planning.</b> Defined the product roadmap and corporate planning, aligning premium collection targets with the company's technical profitability.</li>
+                                <li><b>Pricing & Machine Learning.</b> Overhauled technical pricing models using SAS, R, and Python. Developed innovative parametric insurance products for the agricultural sector leveraging Machine Learning algorithms.</li>
+                                <li><b>Business Intelligence & Monitoring.</b> Engineered executive dashboards in PowerBI and Qlik to track real-time technical performance and portfolio KPIs.</li>
+                                <li><b>Risk Mitigation & Reinsurance.</b> Designed and executed risk mitigation strategies through the negotiation and implementation of optimized reinsurance treaties.</li>
+                                <li><b>Leadership & Stakeholder Management.</b> Led the entire departmental team and managed cross-functional projects, acting as a key liaison for Top Management, vendors, and peers.</li>
+                                <li><b>Data Governance.</b> Oversaw portfolio data flows and implemented advanced Data Quality frameworks to ensure the integrity of actuarial and technical databases.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="timeline-date"><span data-lang="it" class="active-lang">Gennaio 2017 — Gennaio 2018</span><span data-lang="en">January 2017 — January 2018</span></span>
+                    <div class="card" onclick="this.classList.toggle('active')">
+                        <div class="card-header-poste">
+                            <div class="card-titles-poste">
+                                <h3 data-lang="it" class="active-lang">Riserve e Prodotti Non-Life</h3>
+                                <h3 data-lang="en">Non-Life Reserving and Products</h3>
+                                <div class="company"><span data-lang="it" class="active-lang">Poste Assicura - Roma, IT</span><span data-lang="en">Poste Assicura - Rome, IT</span></div>
+                            </div>
+                            <div class="logo-container-poste">
+                                <img class="logo-poste" src="poste_logo.webp" alt="Poste Assicura" />
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <ul data-lang="it" class="active-lang">
+                                <li><b>Riservazione & Solvency II.</b> Calcolo delle riserve tecniche rami danni secondo molteplici criteri valutativi (Local e Solvency II), assicurando la congruità delle passività.</li>
+                                <li><b>Pricing & Product Development.</b> Sviluppo di nuovi prodotti Non-Life e definizione del pricing tecnico tramite l'implementazione di modelli matematico-probabilistici e previsionali.</li>
+                                <li><b>Modellizzazione & Forecasting.</b> Identificazione di modelli statistici avanzati per le proiezioni di business, ottimizzando le strategie di tariffazione tramite Excel e R.</li>
+                                <li><b>Advanced Automation.</b> Progettazione e implementazione di flussi di lavoro automatizzati per l'efficientamento dei processi attuariali ricorrenti utilizzando Python, R e SAS.</li>
+                                <li><b>Data Quality & SQL.</b> Monitoraggio e controllo dell'integrità dei database direzionali tramite routine SAS e SQL, garantendo l'accuratezza dei dati per le valutazioni tecniche.</li>
+                            </ul>
+                            <ul data-lang="en">
+                                <li><b>Technical Reserving.</b> Calculated non-life technical provisions under multiple frameworks (Local GAAP and Solvency II), ensuring liability adequacy.</li>
+                                <li><b>Pricing & Product Development.</b> Contributed to the design of new Non-Life products and defined technical pricing through the application of mathematical and probabilistic models.</li>
+                                <li><b>Actuarial Modeling & Forecasting.</b> Developed statistical models for business projections and pricing optimization, leveraging Excel and R for predictive analytics.</li>
+                                <li><b>Process Automation.</b> Streamlined actuarial workflows by engineering automation tools and scripts using Python, R, and SAS, significantly reducing manual processing time.</li>
+                                <li><b>Data Governance & SQL.</b> Managed and audited large-scale databases used for technical valuations through SAS and SQL routines to ensure high-quality data inputs.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="timeline-date"><span data-lang="it" class="active-lang">Luglio 2014 — Dicembre 2016</span><span data-lang="en">July 2014 — December 2016</span></span>
+                    <div class="card" onclick="this.classList.toggle('active')">
+                        <div class="card-header-deloitte">
+                            <div class="card-titles-deloitte">
+                                <h3 data-lang="it" class="active-lang">Valutazioni Attuariale & Rischi per Assicurazioni - Senior Consultant</h3>
+                                <h3 data-lang="en">Actuarial and Risk Evaluation for Insurance - Senior Consultant</h3>
+                                <div class="company"><span data-lang="it" class="active-lang">Deloitte Consulting - Roma, IT</span><span data-lang="en">Deloitte Consulting - Rome, IT</span></div>
+                            </div>
+                            <div class="logo-container-deloitte">
+                                <img class="logo-deloitte" src="deloitte_logo.svg" alt="Deloitte" />
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <ul data-lang="it" class="active-lang">
+                                <li><b>Solvency II & Standard Formula.</b> Implementazione della Standard Formula per compagnie Danni, garantendo la compliance ai requisiti regolamentari del Pillar I e le relative proiezioni di forecast e budget in ottica Pillari II.</li>
+                                <li><b>Modelli Interni & Rischio.</b> Sviluppo e calibrazione di modelli di rischio avanzati per la transizione verso Modelli Interni (Internal Models) e valutazioni del capitale.</li>
+                                <li><b>Soluzioni Custom End-to-End.</b> Progettazione e sviluppo di tool proprietari per la quantificazione dei rischi finanziari e attuariali tramite MatLab, R ed Excel.</li>
+                                <li><b>Audit & Reserving.</b> Valutazione indipendente delle riserve tecniche secondo i diversi principi contabili vigenti per certificazioni di bilancio e operazioni straordinarie.</li>
+                                <li><b>Project Management.</b> Coordinamento delle attività operative, gestione di piccoli team e interfaccia diretta con stakeholder chiave (manager, partner e clienti).</li>
+                            </ul>
+                            <ul data-lang="en">
+                                <li><b>Solvency II & Standard Formula.</b> Led the implementation of Standard Formula frameworks for Non-Life insurers, ensuring full compliance with Pillar I regulatory requirements and related forecast and budget projections for Pillar II.</li></li>
+                                <li><b>Risk Modeling & Calibration.</b> Developed and calibrated advanced risk models to support the shift from Standard Formula to Internal Models and capital adequacy assessments..</li>
+                                <li><b>End-to-End Tool Development.</b> Designed and engineered custom actuarial tools for risk quantification using MatLab, R, and Excel.</li>
+                                <li><b>External Reserve Valuations.</b> Conducted independent reviews of technical provisions under various accounting standards for statutory audits and M&A activities.</li>
+                                <li><b>Project Management.</b> Coordinated project operations, supervised small teams, and managed high-level relationships with managers, partners and corporate clients.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="timeline-date"><span data-lang="it" class="active-lang">Dicembre 2010 — Giugno 2014</span><span data-lang="en">December 2010 — June 2014</span></span>
+                    <div class="card" onclick="this.classList.toggle('active')">
+                        <div class="card-header-unipol">
+                            <div class="card-titles-unipol">
+                                <h3 data-lang="it" class="active-lang">Riservazione Non-Life & Analisi Tecniche</h3>
+                                <h3 data-lang="en">Non-Life Reserving & Technical Analysis</h3>
+                                <div class="company"><span data-lang="it" class="active-lang">Unipol Assicurazioni - Milano, IT</span><span data-lang="en">Unipol Assicurazioni - Milan, IT</span></div>
+                            </div>
+                            <div class="logo-container-unipol">
+                                <img class="logo-unipol" src="unipol_logo.svg" alt="Unipol" />
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <ul data-lang="it" class="active-lang">
+                                <li><b>Valutazione Riserve Tecniche.</b> Calcolo delle riserve sinistri secondo i principi contabili Local GAAP e Solvency II, applicando modelli deterministici e stocastici.</li>
+                                <li><b>Modellizzazione Attuariale.</b> Sviluppo e manutenzione di modelli matematico-statistici per la riservazione tramite l'integrazione di Excel/VBA, SAS e R.</li>
+                                <li><b>Backtesting & Monitoring.</b> Esecuzione di analisi di backtesting per la validazione delle stime e sviluppo di dashboard per il monitoraggio "live" degli andamenti tecnici di portafoglio.</li>
+                                <li><b>Data Quality & Governance.</b> Implementazione di routine SAS ad hoc per il controllo mensile della qualità e consistenza dei database sottostanti le valutazioni attuariali.</li>
+                            </ul>
+                            <ul data-lang="en">
+                                <li><b>Technical Provisions.</b> Calculated claims reserves under Local GAAP and Solvency II frameworks using advanced actuarial and statistical models.</li>
+                                <li><b>Actuarial Modeling.</b> Developed and refined reserving models by leveraging Excel/VBA, SAS, and R for both deterministic and stochastic estimations.</li>
+                                <li><b>Backtesting & Monitoring.</b> Conducted backtesting analysis to assess estimation accuracy and created "live" monitoring tools to track portfolio technical trends and loss ratios.</li>
+                                <li><b>Data Quality & Governance.</b> Engineered custom SAS routines for monthly data quality audits, ensuring the integrity and consistency of large databases used for actuarial valuations.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="timeline-date"><span data-lang="it" class="active-lang">Giugno 2009 — Dicembre 2009</span><span data-lang="en">June 2009 — December 2009</span></span>
+                    <div class="card" onclick="this.classList.toggle('active')">
+                        <div class="card-header-allianz">
+                            <div class="card-titles-allianz">
+                                <h3 data-lang="it" class="active-lang">Supporto Attuariale per il Business Life (Stage)</h3>
+                                <h3 data-lang="en">Life Business Actuarial Support (Stage)</h3>
+                                <div class="company"><span data-lang="it" class="active-lang">Allianz - Milano, IT</span><span data-lang="en">Allianz - Milan, IT</span></div>
+                            </div>
+                            <div class="logo-container-allianz">
+                                <img class="logo-allianz" src="allianz_logo.svg" alt="Allianz" />
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <ul data-lang="it" class="active-lang">
+                                <li><b>Valutazioni Attuariali.</b> Supporto tecnico all'ufficio attuariale Life per il monitoraggio e la valutazione delle passività del portafoglio.</li>
+                                <li><b>Quality Assurance Modelli.</b> Esecuzione di ricalcoli dei valori di riscatto e test di coerenza sui modelli matematici di sviluppo delle polizze Life.</li>
+                                <li><b>Data Management.</b> Controlli tecnici sulla qualità dei dati e sulla consistenza dei database di portafoglio a supporto dei calcoli attuariali.</li>
+                                <li><b>Process Automation.</b> Sviluppo di tool ad hoc per l'automazione dei check tecnici e dei calcoli ricorrenti, riducendo i tempi di elaborazione manuale.</li>
+                            </ul>
+                            <ul data-lang="en">
+                                <li><b>Actuarial Valuations.</b> Technical support for the Life actuarial department, focusing on portfolio liability valuations and monitoring.</li>
+                                <li><b>Quality Assurance Models.</b> Performed surrender value recalculations and consistency checks on underlying mathematical models for Life insurance products.</li>
+                                <li><b>Data Management.</b> Conducted technical quality controls on portfolio databases to ensure data consistency for actuarial calculations.</li>
+                                <li><b>Process Automation.</b> Created custom tools to automate technical checks and recurring calculations, streamlining manual reporting workflows.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+
+
+        <section style="margin-top: 6rem;">
+            <h2 data-lang="it" class="active-lang">Istruzione</h2>
+            <h2 data-lang="en">Education</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="timeline-date"><span data-lang="it" class="active-lang">2023</span><span data-lang="en">2023</span></span>
+                    <div class="card" onclick="this.classList.toggle('active')">
+                        <div class="card-header-deloitte">
+                            <div class="card-titles-deloitte">
+                                <h3 data-lang="it" class="active-lang">Master in Data Science</h3>
+                                <h3 data-lang="en">Master in Data Science</h3>
+                                <div class="company"><span data-lang="it" class="active-lang">Neural Academy - Roma, IT</span><span data-lang="en">Neural Academy - Rome, IT</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="timeline-date"><span data-lang="it" class="active-lang">2010</span><span data-lang="en">2010</span></span>
+                    <div class="card" onclick="this.classList.toggle('active')">
+                        <div class="card-header-ca">
+                            <div class="card-titles-ca">
+                                <h3 data-lang="it" class="active-lang">Laurea Magistrale in Scienze Statistiche ed Attuariali</h3>
+                                <h3 data-lang="en">Master's Degree in Statistical and Actuarial Sciences</h3>
+                                <div class="company"><span data-lang="it" class="active-lang">Università degli Studi del Sannio - Benevento, IT</span><span data-lang="en">University of Sannio - Benevento, IT</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </section>
+
+        
+
+
+
+        <section style="margin-top: 6rem;">
+            <h2 data-lang="it" class="active-lang">Principali Software e Coding</h2>
+            <h2 data-lang="en">Main Software and Coding</h2>
+
+            <div class="grid-layout gauges">
+                <div class="gauge-svg" data-level="90" role="img">
+                    <svg viewBox="0 0 120 60" aria-hidden="true">
+                        <path class="gauge-track" d="M10 50 A50 50 0 0 1 110 50" />
+                        <path class="gauge-arc" d="M10 50 A50 50 0 0 1 110 50" />
+                    </svg>
+                    <div class="gauge-center">
+                        <div class="gauge-value">90%</div>
+                        <div class="gauge-label">Microsoft Office</div>
+                    </div>
+                </div>
+
+                <div class="gauge-svg" data-level="80" role="img">
+                    <svg viewBox="0 0 120 60" aria-hidden="true">
+                        <path class="gauge-track" d="M10 50 A50 50 0 0 1 110 50" />
+                        <path class="gauge-arc" d="M10 50 A50 50 0 0 1 110 50" />
+                    </svg>
+                    <div class="gauge-center">
+                        <div class="gauge-value">80%</div>
+                        <div class="gauge-label">Apple iWork</div>
+                    </div>
+                </div>
+
+                <div class="gauge-svg" data-level="85" role="img">
+                    <svg viewBox="0 0 120 60" aria-hidden="true">
+                        <path class="gauge-track" d="M10 50 A50 50 0 0 1 110 50" />
+                        <path class="gauge-arc" d="M10 50 A50 50 0 0 1 110 50" />
+                    </svg>
+                    <div class="gauge-center">
+                        <div class="gauge-value">85%</div>
+                        <div class="gauge-label">Python</div>
+                    </div>
+                </div>
+
+                <div class="gauge-svg" data-level="80" role="img">
+                    <svg viewBox="0 0 120 60" aria-hidden="true">
+                        <path class="gauge-track" d="M10 50 A50 50 0 0 1 110 50" />
+                        <path class="gauge-arc" d="M10 50 A50 50 0 0 1 110 50" />
+                    </svg>
+                    <div class="gauge-center">
+                        <div class="gauge-value">80%</div>
+                        <div class="gauge-label">R</div>
+                    </div>
+                </div>
+
+                <div class="gauge-svg" data-level="80" role="img">
+                    <svg viewBox="0 0 120 60" aria-hidden="true">
+                        <path class="gauge-track" d="M10 50 A50 50 0 0 1 110 50" />
+                        <path class="gauge-arc" d="M10 50 A50 50 0 0 1 110 50" />
+                    </svg>
+                    <div class="gauge-center">
+                        <div class="gauge-value">80%</div>
+                        <div class="gauge-label">MatLab</div>
+                    </div>
+                </div>
+
+                <div class="gauge-svg" data-level="90" role="img">
+                    <svg viewBox="0 0 120 60" aria-hidden="true">
+                        <path class="gauge-track" d="M10 50 A50 50 0 0 1 110 50" />
+                        <path class="gauge-arc" d="M10 50 A50 50 0 0 1 110 50" />
+                    </svg>
+                    <div class="gauge-center">
+                        <div class="gauge-value">90%</div>
+                        <div class="gauge-label">SAS</div>
+                    </div>
+                </div>
+
+                <div class="gauge-svg" data-level="80" role="img">
+                    <svg viewBox="0 0 120 60" aria-hidden="true">
+                        <path class="gauge-track" d="M10 50 A50 50 0 0 1 110 50" />
+                        <path class="gauge-arc" d="M10 50 A50 50 0 0 1 110 50" />
+                    </svg>
+                    <div class="gauge-center">
+                        <div class="gauge-value">80%</div>
+                        <div class="gauge-label">SAS Viya</div>
+                    </div>
+                </div>
+
+                <div class="gauge-svg" data-level="85" role="img">
+                    <svg viewBox="0 0 120 60" aria-hidden="true">
+                        <path class="gauge-track" d="M10 50 A50 50 0 0 1 110 50" />
+                        <path class="gauge-arc" d="M10 50 A50 50 0 0 1 110 50" />
+                    </svg>
+                    <div class="gauge-center">
+                        <div class="gauge-value">85%</div>
+                        <div class="gauge-label">SQL</div>
+                    </div>
+                </div>
+
+                <div class="gauge-svg" data-level="80" role="img">
+                    <svg viewBox="0 0 120 60" aria-hidden="true">
+                        <path class="gauge-track" d="M10 50 A50 50 0 0 1 110 50" />
+                        <path class="gauge-arc" d="M10 50 A50 50 0 0 1 110 50" />
+                    </svg>
+                    <div class="gauge-center">
+                        <div class="gauge-value">80%</div>
+                        <div class="gauge-label">PowerBI</div>
+                    </div>
+                </div>
+
+                <div class="gauge-svg" data-level="70" role="img">
+                    <svg viewBox="0 0 120 60" aria-hidden="true">
+                        <path class="gauge-track" d="M10 50 A50 50 0 0 1 110 50" />
+                        <path class="gauge-arc" d="M10 50 A50 50 0 0 1 110 50" />
+                    </svg>
+                    <div class="gauge-center">
+                        <div class="gauge-value">70%</div>
+                        <div class="gauge-label">Qlik</div>
+                    </div>
+                </div>
+
+                <div class="gauge-svg" data-level="85" role="img">
+                    <svg viewBox="0 0 120 60" aria-hidden="true">
+                        <path class="gauge-track" d="M10 50 A50 50 0 0 1 110 50" />
+                        <path class="gauge-arc" d="M10 50 A50 50 0 0 1 110 50" />
+                    </svg>
+                    <div class="gauge-center">
+                        <div class="gauge-value">85%</div>
+                        <div class="gauge-label">Google Data Studio</div>
+                    </div>
+                </div>
+
+                <div class="gauge-svg" data-level="70" role="img">
+                    <svg viewBox="0 0 120 60" aria-hidden="true">
+                        <path class="gauge-track" d="M10 50 A50 50 0 0 1 110 50" />
+                        <path class="gauge-arc" d="M10 50 A50 50 0 0 1 110 50" />
+                    </svg>
+                    <div class="gauge-center">
+                        <div class="gauge-value">70%</div>
+                        <div class="gauge-label">HTML/CSS/JS</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+
+
+        <section style="margin-top: 6rem;">
+            <h2 data-lang="it" class="active-lang">Caratteristiche Personali</h2>
+            <h2 data-lang="en">Personal Skills</h2>
+
+            <div class="grid-layout">
+                <div class="box-item"><span data-lang="it" class="active-lang">Pensiero Adattivo</span><span data-lang="en">Adaptive Thinking</span></div>
+                <div class="box-item"><span data-lang="it" class="active-lang">Mindset Innovativo</span><span data-lang="en">Innovation Mindset</span></div>
+                <div class="box-item"><span data-lang="it" class="active-lang">Solving Complesso</span><span data-lang="en">Problem Solving</span></div>
+                <div class="box-item"><span data-lang="it" class="active-lang">Decisioni Guidate dai Dati</span><span data-lang="en">Data-Driven Decision</span></div>
+            </div>
+            <div class="grid-layout">
+                <div class="box-item"><span data-lang="it" class="active-lang">Creatività Strategica</span><span data-lang="en">Strategic Creativity</span></div>
+                <div class="box-item"><span data-lang="it" class="active-lang">Curiosità Intellettuale</span><span data-lang="en">Intellectual Curiosity</span></div>
+                <div class="box-item"><span data-lang="it" class="active-lang">Ambizioso</span><span data-lang="en">Ambitious</span></div>
+                <div class="box-item"><span data-lang="it" class="active-lang">Lavoro di Squadra</span><span data-lang="en">Teamwork</span></div>
+            </div>
+        </section>
+
+
+        
+
+
+
+        <section style="margin-top: 6rem;">
+            <h2 data-lang="it" class="active-lang">Passioni</h2>
+            <h2 data-lang="en">Hobbies</h2>
+
+            <div class="passions-grid">
+                <div class="passion" title="Fotografia">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <div class="passion-label"><span data-lang="it" class="active-lang">Fotografia</span><span data-lang="en">Photography</span></div>
+                </div>
+
+                <div class="passion" title="Arte">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 3a7 7 0 0 0-7 7v2a3 3 0 0 0 3 3h.5a2 2 0 0 1 2 2 4 4 0 1 0 4-4h-1.5A5 5 0 0 0 12 3z"></path>
+                        <circle cx="9.5" cy="8.5" r="0.8"></circle>
+                        <circle cx="13" cy="7.5" r="0.7"></circle>
+                        <circle cx="15.5" cy="10" r="0.6"></circle>
+                    </svg>
+                    <div class="passion-label"><span data-lang="it" class="active-lang">Arte</span><span data-lang="en">Art</span></div>
+                </div>
+
+                <div class="passion" title="Lettura">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 6h7v12H3z"></path>
+                        <path d="M14 6h7v12h-7z"></path>
+                    </svg>
+                    <div class="passion-label"><span data-lang="it" class="active-lang">Lettura</span><span data-lang="en">Reading</span></div>
+                </div>
+
+                <div class="passion" title="Musica">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 12a8 8 0 0 1 16 0v3" />
+                        <rect x="2" y="13" width="4" height="6" rx="1" />
+                        <rect x="18" y="13" width="4" height="6" rx="1" />
+                        <path d="M8 12a4 4 0 0 1 8 0" />
+                    </svg>
+                    <div class="passion-label"><span data-lang="it" class="active-lang">Musica</span><span data-lang="en">Music</span></div>
+                </div>
+
+                <div class="passion" title="Nuoto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M2 15c4-2 6-2 9-1s6 1 11-2"></path>
+                        <circle cx="6" cy="11" r="1.2"></circle>
+                    </svg>
+                    <div class="passion-label"><span data-lang="it" class="active-lang">Nuoto</span><span data-lang="en">Swimming</span></div>
+                </div>
+
+                <div class="passion" title="Ciclismo">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="7" cy="17" r="3"></circle>
+                        <circle cx="17" cy="17" r="3"></circle>
+                        <path d="M7 17l3-6h3l3 3" />
+                        <path d="M10 11v-2l2-1" />
+                    </svg>
+                    <div class="passion-label"><span data-lang="it" class="active-lang">Ciclismo</span><span data-lang="en">Cycling</span></div>
+                </div>
+
+                <div class="passion" title="Corsa">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M13 4c0 1-1 2-2 2s-2-1-2-2 1-2 2-2 2 1 2 2z" />
+                        <path d="M6 12c1-1 3-2 5-2 1 0 2 1 3 2l1-1 1 2-2 1-1 2" />
+                        <path d="M4 20c1-1 3-2 5-2s3 1 5 1" />
+                        <path d="M16 13l2 3" />
+                    </svg>
+                    <div class="passion-label"><span data-lang="it" class="active-lang">Corsa</span><span data-lang="en">Running</span></div>
+                </div>
+            </div>
+        </section>
+
+
+        
+
+
+
+        <section style="margin-top: 6rem;">
+            <h2 data-lang="it" class="active-lang">Patenti</h2>
+            <h2 data-lang="en">Licenses</h2>
+
+            <div style="display:flex;">
+                <div style="flex:0 0 auto;">
+                    <div class="license-grid" style="margin-top: 0.6rem;">
+                                <div class="license-item" title="Patente B" aria-label="Patente B">
+                                    <div class="license-badge" aria-hidden="true">B</div>
+                                </div>
+
+                        <div class="license-item" title="Patente A" aria-label="Patente A">
+                            <div class="license-badge" aria-hidden="true">A</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function setLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                if (el.getAttribute('data-lang') === lang) {
+                    el.classList.add('active-lang');
+                } else {
+                    el.classList.remove('active-lang');
+                }
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.gauge-svg').forEach(g => {
+                const level = Math.max(0, Math.min(100, parseInt(g.getAttribute('data-level') || '0', 10)));
+                const arc = g.querySelector('.gauge-arc');
+                const valueEl = g.querySelector('.gauge-value');
+                if (!arc) return;
+                const totalLength = arc.getTotalLength();
+                const fillPortion = (level / 100);
+                const dash = totalLength;
+                const offset = dash * (1 - fillPortion);
+                arc.style.strokeDasharray = `${dash}`;
+                arc.style.strokeDashoffset = `${offset}`;
+                if (valueEl) valueEl.textContent = level + '%';
+                console.debug('SVG Gauge:', { level, totalLength, dash, offset });
+                g.addEventListener('click', (e) => {
+                    g.classList.toggle('open');
+                    const info = g.querySelector('.gauge-info');
+                    if (info) info.setAttribute('aria-hidden', g.classList.contains('open') ? 'false' : 'true');
+                });
+            });
+        });
+
+        function downloadCV() {
+            const link = document.createElement('a');
+            link.href = 'CV_Pasquale Sebastianelli.pdf';
+            link.download = 'CV_Pasquale Sebastianelli.pdf';
+            link.click();
+        }
+    </script>
+</body>
+</html>
